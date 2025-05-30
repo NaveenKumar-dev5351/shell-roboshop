@@ -1,3 +1,3 @@
 #!/bin/bash
 
-Hello am a devops engineer
+echo "Hello am a devops engineer"
