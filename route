@@ -6,6 +6,14 @@ INSTANCES=("frontend" "mongodb" "catalogue" "redis" "user" "cart" "mysql" "rabbi
 ZONE_ID="Z06966282ETBPQYP576KM"
 DOMAIN_NAME="www.devops84.store."
 
+if [ $instance != "frontend" ]
+    then
+      IP=$(aws ec2 describe-instances --instance-ids $INSTANCE_ID --query "Reservations[0].Instances[0].PrivateIpAddress" --output text)
+    else 
+      IP=$(aws ec2 describe-instances --instance-ids $INSTANCE_ID --query "Reservations[0].Instances[0].PublicIpAddress" --output text)
+    fi
+    echo "$instances IP address: $IP"
+
 aws route53 change-resource-record-sets \
   --hosted-zone-id $ZONE_ID \
   --change-batch '
