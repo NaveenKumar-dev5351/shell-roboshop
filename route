@@ -4,7 +4,7 @@ AMI_ID="ami-09c813fb71547fc4f"
 SG_ID="sg-032c5ed4c7e550e18"
 INSTANCES=("frontend" "mongodb" "catalogue" "redis" "user" "cart" "mysql" "rabbitmq" "shipping" "dispatch" "payment")
 ZONE_ID="Z06966282ETBPQYP576KM"
-DOMAIN_NAME="devops84.store"
+DOMAIN_NAME="devops84.store."
 
 aws route53 change-resource-record-sets \
   --hosted-zone-id $ZONE_ID \
