@@ -34,7 +34,6 @@ VALIDATE(){
     fi
 }
 
-dnf module list nginx
 
 dnf module disable nginx -y &>>$LOG_FILE
 VALIDATE $? "Disabling default nginx"
