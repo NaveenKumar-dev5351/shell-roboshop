@@ -1,5 +1,6 @@
 #!/bin/bash
 
+START_TIME=$(date +%s)
 USERID=$(id -u)
 R="\e[31m"
 G="\e[32m"
@@ -22,7 +23,7 @@ then
 else
     echo "you are running with root access" | tee -a $LOG_FILE
 fi
-
+ 
 echo "please enter rabbitmq password to setup"
 read -s RABBITMQ_PASSWD
 
@@ -40,17 +41,17 @@ VALIDATE(){
 cp rabbitmq.repo /etc/yum.repos.d/rabbitmq.repo
 VALIDATE $? "adding rabbitmq repo"
 
-dnf install rabbitmq-server -y &>>$LOG_FILE
-VALIDATE $? "installing rabbitmq server"
+dnf install rabbitmq-server -y
+VALIDATE $? "Installing rabbitmq server"
 
-systemctl enable rabbitmq-server &>>$LOG_FILE
-VALIDATE $? "enabling rabbitmq server"
+systemctl enable rabbitmq-server
+VALIDATE $? "Enabling rabbitmq server"
 
-systemctl start rabbitmq-server &>>$LOG_FILE
+systemctl start rabbitmq-server
 VALIDATE $? "starting rabbitmq server"
 
-rabbitmqctl add_user roboshop $RABBITMQ_PASSWD &>>$LOG_FILE
-rabbitmqctl set_permissions -p / roboshop ".*" ".*" ".*" &>>$LOG_FILE
+rabbitmqctl add_user roboshop $RABBITMQ_PASSWD
+rabbitmqctl set_permissions -p / roboshop ".*" ".*" ".*"
 
 END_TIME=$(date +%s)
 TOTAL_TIME=$(( $END_TIME - $START_TIME ))
