@@ -10,9 +10,9 @@ N="\e[0m"
 LOGS_FOLDER="/var/log/Roboshop-logs"
 SCRIPT_NAME=$(echo $0 | cut -d "." -f1)
 LOG_FILE="$LOGS_FOLDER/$SCRIPT_NAME.log"
-SCRIPT_DIR=$PWD
+SCRIPT_DIR="$PWD"
 
-mkdir -p $LOGS_FOLDER
+mkdir -p "$LOGS_FOLDER"
 echo "script started executing at: $(date)" | tee -a $LOG_FILE
 
 # check the user has root priveleges or not
@@ -37,7 +37,6 @@ VALIDATE() {
   fi
 }
 
-
 dnf install maven -y &>>$LOG_FILE
 VALIDATE $? "installing maven and java"
 
@@ -51,7 +50,7 @@ else
 fi
 
 mkdir -p /app 
-VALIDATE "creating app directory"
+VALIDATE $? "creating app directory"
 
 curl -L -o /tmp/shipping.zip https://roboshop-artifacts.s3.amazonaws.com/shipping-v3.zip &>>$LOG_FILE
 VALIDATE $? "downloading shipping"
@@ -68,6 +67,7 @@ mv target/shipping-1.0.jar shipping.jar &>>$LOG_FILE
 VALIDATE $? "Moving and renaming the jar file"
 
 cp $SCRIPT_DIR/shipping.service /etc/systemd/system/shipping.service
+VALIDATE $? "copying of shipping service"
 
 systemctl daemon-reload &>>$LOG_FILE
 VALIDATE $? "daemon reload"
@@ -87,7 +87,7 @@ mysql -h mysql.devops84.store -uroot -p$MYSQL_ROOT_PASSWORD < /app/db/master-dat
 VALIDATE $? "loading data into mysql"
 
 systemctl restart shipping &>>$LOG_FILE
-VALIDATE $?"restarting shipping"
+VALIDATE $? "restart shipping"
 
 END_TIME=$(date +%s)
 TOTAL_TIME=$(( $END_TIME - $START_TIME ))
