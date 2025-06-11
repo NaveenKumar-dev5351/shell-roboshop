@@ -27,7 +27,7 @@ fi
 echo "please enter root password to setup"
 read -s MYSQL_ROOT_PASSWORD
 
-#validate functions takes input as exit status, what command they tried to install
+# validate functions takes input as exit status, what command they tried to install
 VALIDATE(){
     if [ $1 -eq 0 ]
     then
@@ -41,11 +41,12 @@ VALIDATE(){
 dnf install maven -y &>>$LOG_FILE
 VALIDATE $? "installing maven and java"
 
-id roboshop
+id roboshop 
 if [ $? -ne 0 ]
-then  
+then
     useradd --system --home /app --shell /sbin/nologin --comment "roboshop system user" roboshop &>>$LOG_FILE
-else 
+    VALIDATE $? "Creating roboshop system user"
+else
     echo -e "system user roboshop already created ... $Y skipping $N"
 fi
 
