@@ -4,3 +4,9 @@ echo "hello world"
 
 read name
 echo "Hi $name"
+
+if [ "$name" = "Naveen" ]; then
+  echo "Hello, Naveen"
+else
+  echo "Who are you?"
+fi
