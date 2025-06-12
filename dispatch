@@ -15,9 +15,9 @@ for i in 1 2 3; do
   echo "name $i"
 done
 
-count=4
-while [ $count -le 5 ]; do
-  echo $count
-  ((count++))
+Name=Naveen
+while [ $Name -ne Naveen ]; do
+  echo $Name
+  ((Name++))
 done
 
