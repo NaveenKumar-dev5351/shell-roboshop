@@ -10,3 +10,7 @@ if [ "$name" = "Naveen" ]; then
 else
   echo "Who are you?"
 fi
+
+for i in 1 2 3; do
+  echo "Number $i"
+done
