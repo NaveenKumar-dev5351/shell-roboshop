@@ -1,25 +1,7 @@
 #!/bin/bash  
 
-echo "hello world"
+greet() {
+  echo "Hello, $1"
+}
 
-read name
-echo "Hi $name"
-
-if [ "$name" = "Naveen" ]; then
-  echo "Hello, Naveen"
-else
-  echo "Who are you?"
-fi
-
-for i in 1 2 3; do
-  echo "name $i"
-done
-
-Name="rao"
-while [ "$Name" != "Naveen" ]; do
-  read -p "Enter your name: " Name
-done
-
-echo "Welcome, $Name!"
-
-
+greet "Naveen"
