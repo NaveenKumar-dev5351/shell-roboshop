@@ -15,9 +15,11 @@ for i in 1 2 3; do
   echo "name $i"
 done
 
-Name=Naveen
-while [ $Name -ne Naveen ]; do
-  echo $Name
-  ((Name++))
+Name=""
+while [ "$Name" != "Naveen" ]; do
+  read -p "Enter your name: " Name
 done
+
+echo "Welcome, $Name!"
+
 
